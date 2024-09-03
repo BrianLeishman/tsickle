@@ -357,7 +357,7 @@ export function generateExterns(
       if (name.kind === ts.SyntaxKind.Identifier) {
         fqn += '.';  // computed names include [ ] in their getText() representation.
       }
-      fqn += name.getText();
+      fqn += name.getText().replace(/[^$_\w\d]/g, '_');
       emit(`${fqn} = function(${paramsStr}) {};\n`);
     } else {
       if (name.kind !== ts.SyntaxKind.Identifier) {
